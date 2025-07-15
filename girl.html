@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>العناية بالنساء - Luminé</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body { margin: 0; font-family: 'Cairo', sans-serif; background: #f4f4f4; }
+    header, footer {
+      background: #c2185b;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background: #e91e63;
+      text-align: center;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      background: url('https://via.placeholder.com/1200x250/c2185b/fff?text=خصم+20٪+على+منتجات+العناية+بالنساء') center/cover no-repeat;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px #000;
+      margin-bottom: 20px;
+    }
+    .products-carousel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      width: 220px;
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .product:hover {
+      transform: scale(1.03);
+    }
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .product h3 { margin: 10px 0 5px; font-size: 16px; }
+    .product p { margin: 5px 0; color: #333; font-size: 14px; }
+    .price { text-decoration: line-through; color: #999; font-size: 13px; }
+    .discount { color: #d32f2f; font-weight: bold; }
+    .rating { color: #fbc02d; margin-bottom: 8px; font-size: 14px; }
+    .product button {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Luminé - منتجات العناية بالنساء</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="men.html">العناية بالرجال</a>
+    <a href="women.html">العناية بالنساء</a>
+    <a href="cart.html">عربة التسوق</a>
+  </nav>
+
+  <div class="hero">خصم 20% على جميع منتجات العناية بالنساء لفترة محدودة</div>
+
+  <div class="products-carousel" id="productList"></div>
+
+  <footer>
+    تواصل معنا: <a href="mailto:shriefashr6@gmail.com" style="color: #fff; text-decoration: underline;">shriefashr6@gmail.com</a>
+  </footer>
+
+  <script>
+    const products = [
+      { name: "كريم نيتروجينا للترطيب", image: "https://i.imgur.com/psrjtrP.jpg", rating: 4.9, originalPrice: 290 },
+      { name: "غسول الوجه غارنييه", image: "https://i.imgur.com/KzL1GyZ.jpg", rating: 4.7, originalPrice: 310 },
+      { name: "سيروم فيتامين C", image: "https://i.imgur.com/HroN9SY.jpg", rating: 4.8, originalPrice: 350 },
+      { name: "ماسك الطين المغربي", image: "https://i.imgur.com/1p8Tkud.jpg", rating: 4.6, originalPrice: 280 },
+      { name: "واقي شمس لاروش", image: "https://i.imgur.com/MkWDLOb.jpg", rating: 5.0, originalPrice: 390 },
+      { name: "مزيل مكياج نيفيا", image: "https://i.imgur.com/DuPeHX7.jpg", rating: 4.4, originalPrice: 250 },
+      { name: "مرطب شفايف فازلين", image: "https://i.imgur.com/z29oV8I.jpg", rating: 4.3, originalPrice: 160 },
+      { name: "تونر ماء الورد", image: "https://i.imgur.com/vcUDcfp.jpg", rating: 4.2, originalPrice: 220 },
+      { name: "كريم النهار Eucerin", image: "https://i.imgur.com/mF4nmc7.jpg", rating: 4.7, originalPrice: 360 },
+      { name: "زيت جوز الهند الطبيعي", image: "https://i.imgur.com/mbzDKQh.jpg", rating: 4.5, originalPrice: 240 }
+    ];
+
+    const productList = document.getElementById("productList");
+
+    products.forEach(product => {
+      const discountedPrice = Math.round(product.originalPrice * 0.8);
+      const fullStars = "★".repeat(Math.floor(product.rating));
+      const emptyStars = "☆".repeat(5 - Math.floor(product.rating));
+      const stars = `${fullStars}${emptyStars}`;
+
+      const productHTML = `
+        <div class="product">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p class="rating">${stars} (${product.rating.toFixed(1)})</p>
+          <p class="price">${product.originalPrice} جنيه</p>
+          <p class="discount">${discountedPrice} جنيه بعد الخصم</p>
+          <button>أضف إلى السلة</button>
+        </div>
+      `;
+
+      productList.innerHTML += productHTML;
+    });
+  </script>
+
+</body>
+</html>
